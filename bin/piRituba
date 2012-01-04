@@ -1,0 +1,12 @@
+#!/usr/bin/ruby
+while true
+  trap("INT") do 
+    puts "\nVocê sai de piRituba mas piRituba não sai de você"
+    while x = gets 
+      if(x.strip == "NOIS")
+        exit(0)
+      end
+      puts x
+    end
+  end
+end

@@ -1,0 +1,61 @@
+# -*- encoding: utf-8 -*-
+<%
+def lib
+	File.expand_path('../lib/', __FILE__)
+end
+
+def name
+	@name || File.basename(File.expand_path("."))
+end
+
+def version # This one is directly from: https://github.com/mojombo/rakegem/blob/master/Rakefile
+	@version || lambda {
+  	line = File.read(File.join(lib, "#{name}.rb"))[/^\s*VERSION\s*=\s*.*/]
+  	line.match(/.*VERSION\s*=\s*['"](.*)['"]/)[1]
+	}.call
+end
+
+def git_files(param=nil)
+	`git ls-files #{param}`.split("\n")
+end
+
+def files
+	@files || git_files.reject do |file|
+    file =~ /\.(gitignore|rvmrc)|Gemfile.lock/
+  end
+end
+
+def test_files
+  @test_files || git_files("-- spec/*")
+end
+
+def executable_files
+  @executable_files || git_files("-- bin/*").map { |file| file.gsub("bin/", "") }
+end
+%>
+lib = File.expand_path('../lib/', __FILE__)
+$:.unshift lib unless $:.include?(lib)
+
+Gem::Specification.new do |s|
+  s.name        = "<%= name %>"
+  s.version     = "<%= version %>"
+  s.platform    = Gem::Platform::RUBY
+  s.authors     = ["Ricardo Valeriano", "Diego Chohfi", "Hanneli Tavante"]
+  s.email       = ["ricardovaleriano@gmail.com", "dchohfi@gmail.com", "haneelita@gmail.com"]
+  s.homepage    = "Tem nao"
+  s.summary     = "Foda"
+  s.description = "piRituba é nois"
+
+  s.required_rubygems_version = ">= 0"
+
+  #s.add_development_dependency "rspec" pra que?
+
+	#s.require_path = 'lib'
+	
+  s.files         = <%= files %>
+  s.test_files    = <%= test_files %>
+
+	<% if executable_files %>
+  s.executables  = <%= executable_files %>
+	<% end %>
+end
