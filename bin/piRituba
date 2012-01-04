@@ -4,10 +4,14 @@ while true
   trap("INT") do 
     puts "\nVocê sai de piRituba mas piRituba não sai de você"
     while x = gets 
-      if(x.strip.upcase == "NóIS" || x.strip.upcase == "NOIS")
+      message = "\nPirituba é quem!? É [...]"
+      if(x.strip == "NOIS" || x.strip == "NÓIS")
+        puts "\n\n\nÉ NÓIS memo, vagabundo!\n\n\n"
         exit(0)
+      elsif(x.strip == "nois" || x.strip == "nóis")
+        message = "\n\n\nNÓIS é mais mano! NÓIS é maior!\n\n"
       end
-      puts "Pirituba é quem!?"
+      puts message
     end
   end
 end

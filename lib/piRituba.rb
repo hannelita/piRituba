@@ -1,4 +1,4 @@
 module piRituba
-  VERSION = "6.6.6"
+  VERSION = "0.0.666"
 end
   

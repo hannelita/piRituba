@@ -5,7 +5,7 @@ $:.unshift lib unless $:.include?(lib)
 
 Gem::Specification.new do |s|
   s.name        = "piRituba"
-  s.version     = "6.6.6.rc"
+  s.version     = "0.0.666"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Ricardo Valeriano", "Diego Chohfi", "Hanneli Tavante"]
   s.email       = ["ricardovaleriano@gmail.com", "dchohfi@gmail.com", "haneelita@gmail.com"]
